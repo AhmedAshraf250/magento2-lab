@@ -1,0 +1,39 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Magento generated/runtime files
+/generated/
+/var/*
+!/var/.htaccess
+/pub/static/*
+!/pub/static/.htaccess
+/pub/media/*
+!/pub/media/.htaccess
+
+# Local config and secrets
+/app/etc/env.php
+# /app/etc/config.php
+/auth.json
+/.env
+
+# IDE / OS
+/.idea/
+/.vscode/
+.DS_Store
+
+# Logs / dumps / archives
+*.log
+*.sql
+*.tar
+*.tar.gz
+*.zip
+
+# Magento runtime folders / Magento cache/session/report leftovers
+/var/cache/
+/var/page_cache/
+/var/session/
+/var/log/
+/var/report/
+/var/view_preprocessed/
+/pub/static/_cache/
