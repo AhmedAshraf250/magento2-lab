@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <!-- <block class="Ahmed\Jobs\Block\Name" name="Ahmed_Jobs_Name" template="Ahmed_Jobs::index.phtml" /> -->
+            <!-- <uiComponent name="Ahmed_Jobs_Department_Listing" /> -->
+            <uiComponent name="jobs_department_listing" />
+        </referenceContainer>
+    </body>
+</page>

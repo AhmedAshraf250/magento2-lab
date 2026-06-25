@@ -133,8 +133,37 @@ class UpgradeSchema implements UpgradeSchemaInterface
             }
         }
 
-        if ($context->getVersion() && version_compare($context->getVersion(), '1.0.0.1') < 0) {
-            // Action to do if module version is less than 1.0.0.1
+        if ($context->getVersion() && version_compare($context->getVersion(), '1.0.0.2') < 0) {
+            // Action to do if module version is less than 1.0.0.2
+            /**
+             * Add full text index to our table department
+             */
+
+            $tableName = $installer->getTable('ahmed_department');
+            $fullTextIntex = ['name']; // Column with fulltext index, you can put multiple fields
+
+
+            $connection->addIndex(
+                $tableName,
+                $installer->getIdxName($tableName, $fullTextIntex, \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT),
+                $fullTextIntex,
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+            );
+
+            /**
+             * Add full text index to our table jobs
+             */
+
+            $tableName = $installer->getTable('ahmed_job');
+            $fullTextIntex = ['title', 'type', 'location', 'description']; // Column with fulltext index, you can put multiple fields
+
+
+            $connection->addIndex(
+                $tableName,
+                $installer->getIdxName($tableName, $fullTextIntex, \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT),
+                $fullTextIntex,
+                \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+            );
         }
 
         if ($context->getVersion() && version_compare($context->getVersion(), '1.1.0.0') < 0) {

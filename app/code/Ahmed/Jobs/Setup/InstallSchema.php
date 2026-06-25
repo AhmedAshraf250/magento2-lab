@@ -39,6 +39,15 @@ class InstallSchema implements InstallSchemaInterface
                     ['nullable' => false, 'default' => ''],
                     'Department Description'
                 )
+                ->addIndex(
+                    $installer->getIdxName(
+                        $departmentTableName,
+                        ['name'],
+                        \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+                    ),
+                    ['name'],
+                    ['type' => \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT]
+                )
                 ->setComment('Department management for jobs module');
 
             $connection->createTable($departmentTable);
@@ -106,6 +115,15 @@ class InstallSchema implements InstallSchemaInterface
                 ->addIndex(
                     $installer->getIdxName($jobTableName, ['title']),
                     ['title']
+                )
+                ->addIndex(
+                    $installer->getIdxName(
+                        $jobTableName,
+                        ['title', 'type', 'location', 'description'],
+                        \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
+                    ),
+                    ['title', 'type', 'location', 'description'],
+                    ['type' => \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT]
                 )
                 ->addForeignKey(
                     $installer->getFkName($jobTableName, 'department_id', 'ahmed_department', 'entity_id'),

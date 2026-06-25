@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ahmed_Jobs::job_head" title="Jobs" module="Ahmed_Jobs" sortOrder="100" parent="Magento_Backend::content" resource="Ahmed_Jobs::job_head"/>
+        <add id="Ahmed_Jobs::department" title="Departments" module="Ahmed_Jobs" sortOrder="10" parent="Ahmed_Jobs::job_head" action="jobs/department" resource="Ahmed_Jobs::department"/>
+        <add id="Ahmed_Jobs::job" title="Jobs" module="Ahmed_Jobs" sortOrder="20" parent="Ahmed_Jobs::job_head" action="jobs/job" resource="Ahmed_Jobs::job"/>
+    </menu>
+</config> -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ahmed_Jobs::job_head" title="Jobs" module="Ahmed_Jobs" sortOrder="100" resource="Ahmed_Jobs::job_head" />
+        <add id="Ahmed_Jobs::department" title="Departments" module="Ahmed_Jobs" sortOrder="10" parent="Ahmed_Jobs::job_head" action="jobs/department" resource="Ahmed_Jobs::department" />
+        <add id="Ahmed_Jobs::job" title="Jobs" module="Ahmed_Jobs" sortOrder="20" parent="Ahmed_Jobs::job_head" action="jobs/job" resource="Ahmed_Jobs::job" />
+    </menu>
+</config>
