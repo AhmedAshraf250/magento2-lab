@@ -267,3 +267,8 @@
         Then, [Reporting] uses the [CollectionFactory] to convert the name into a [SearchResult collection], 
         returning the [rows] to the [UI listing] for display. 
     -->
+
+
+    <!-- 
+        UI grid controls -> DataProvider -> SearchResult collection -> SQL with filters/paging
+    -->

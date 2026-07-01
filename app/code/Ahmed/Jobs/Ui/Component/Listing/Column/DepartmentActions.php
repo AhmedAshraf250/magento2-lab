@@ -54,6 +54,11 @@ class DepartmentActions extends Column
                     ),
                     'label' => __('Delete'),
                     'hidden' => false,
+                    'confirm' => [
+                        'title' => __('Delete %1', $item['name']),
+                        'message' => __('Are you sure you want to delete a %1 record?', $item['name']),
+                    ],
+                    'post' => true,
                 ];
             }
         }

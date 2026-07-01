@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <!-- <block class="Ahmed\Jobs\Block\Adminhtml\Department\Edit" name="Ahmed_Jobs_Name" /> --> <!-- template="Ahmed_Jobs::block_name.phtml" -->             
+            <uiComponent name="jobs_department_form"/>
+        </referenceContainer>
+    </body>
+</page>
+
+<!--
+Render flow for the legacy admin edit form:
+
+1. The layout handle jobs_department_edit.xml adds the main container block:
+   Ahmed\Jobs\Block\Adminhtml\Department\Edit
+
+2. That block extends Magento\Backend\Block\Widget\Form\Container.
+   It renders the admin form wrapper: title, Back/Reset/Save buttons, and form area.
+
+3. During layout preparation, Form\Container::_prepareLayout() creates a child block named "form"
+   using _blockGroup + _controller + _mode:
+   Ahmed_Jobs + adminhtml_department + edit + Form
+   => Ahmed\Jobs\Block\Adminhtml\Department\Edit\Form
+
+4. The container template calls:
+   $block->getFormHtml()
+
+5. Form\Container::getFormHtml() sets the save URL on the child form block:
+   getChildBlock('form')->setData('action', getSaveUrl())
+
+6. Then the child form block is rendered.
+
+7. Before rendering, Magento\Backend\Block\Widget\Form::_beforeToHtml() calls:
+   _prepareForm()
+
+8. Our Edit\Form::_prepareForm() creates the form object with FormFactory,
+   adds the fieldset and fields, fills values from the registered model,
+   then calls setForm($form).
+
+9. The form object finally renders the HTML <form> and its fields.
+-->
+
+<!-- 
+jobs_department_edit.xml
+        |
+        v
+<block class="Ahmed\Jobs\Block\Adminhtml\Department\Edit">
+        |
+        v
+Ahmed\Jobs\Block\Adminhtml\Department\Edit
+extends Magento\Backend\Block\Widget\Form\Container
+        |
+        v
+Form\Container::_construct()
+adds buttons: back / reset / delete / save
+        |
+        v
+Form\Container::_prepareLayout()
+        |
+        v
+Form\Container::_buildFormClassName()
+        |
+        v
+Ahmed\Jobs\Block\Adminhtml\Department\Edit\Form
+is created as child block: "form"
+        |
+        v
+Magento_Backend::widget/form/container.phtml
+        |
+        v
+$block->getFormHtml()
+        |
+        v
+Form\Container::getFormHtml()
+        |
+        v
+getChildBlock('form')->setData('action', getSaveUrl())
+        |
+        v
+getChildHtml('form')
+        |
+        v
+Ahmed\Jobs\Block\Adminhtml\Department\Edit\Form
+extends Magento\Backend\Block\Widget\Form\Generic
+        |
+        v
+Magento\Backend\Block\Widget\Form::_beforeToHtml()
+        |
+        v
+Ahmed\Jobs\Block\Adminhtml\Department\Edit\Form::_prepareForm()
+        |
+        v
+FormFactory::create()
+        |
+        v
+$form->addFieldset()
+        |
+        v
+$fieldset->addField()
+        |
+        v
+$form->setValues($model->getData())
+        |
+        v
+$form->setUseContainer(true)
+        |
+        v
+$this->setForm($form)
+        |
+        v
+Magento\Backend\Block\Widget\Form::getFormHtml()
+        |
+        v
+Magento\Framework\Data\Form::getHtml()
+        |
+        v
+Final HTML form
+-->
