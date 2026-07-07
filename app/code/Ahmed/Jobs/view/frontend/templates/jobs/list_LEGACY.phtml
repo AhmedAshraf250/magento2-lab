@@ -1,0 +1,78 @@
+<?php
+
+/**  @var \Ahmed\Jobs\Block\Job\ListJob $this */
+
+$jobCollection = $this->getLoadedJobCollection();
+$iterator = 1;
+$total = $jobCollection->count();
+?>
+
+<div class="job-wrapper">
+    <ol class="jobs list">
+        <?php foreach ($jobCollection as $job): ?>
+            <li class="item<?php echo ($iterator == 1) ? ' first' : ''; ?><?php echo ($total == $iterator) ? ' last' : ''; ?>">
+                <div class="title">
+                    <a href="<?php echo $this->getJobUrl($job); ?>" title="<?php echo $job->getTitle(); ?>">
+                        <?php echo $job->getTitle(); ?>
+                    </a>
+                </div>
+                <div class="department_name">
+                    <?php echo __('Department : '); ?>
+                    <a href="<?php echo $this->getDepartmentUrl($job); ?>" title="<?php echo $job->getDepartmentName(); ?>">
+                        <?php echo $job->getDepartmentName(); ?>
+                    </a>
+                </div>
+                <div class="type"><?php echo $job->getType(); ?></div>
+                <div class="location"><?php echo $job->getLocation(); ?></div>
+                <div class="date"><?php echo $this->formatDate($job->getDate()); ?></div>
+                <div class="description"><?php echo $job->getDescription(); ?></div>
+            </li>
+            <?php $iterator++; ?>
+        <?php endforeach; ?>
+    </ol>
+</div>
+
+
+
+
+
+// =============================
+
+<?php
+
+/** @var \Ahmed\Jobs\Block\Job\ListJob $block */
+
+$jobCollection = $block->getLoadedJobCollection();
+?>
+
+<div class="job-wrapper">
+    <?php if (!$jobCollection->getSize()): ?>
+        <div class="message info empty">
+            <div><?= $block->escapeHtml(__('There are no jobs available at the moment.')) ?></div>
+        </div>
+    <?php else: ?>
+        <ol class="jobs list">
+            <?php foreach ($jobCollection as $job): ?>
+                <li class="item">
+                    <div class="title">
+                        <a href="<?= $block->escapeUrl($block->getJobUrl($job)) ?>"
+                            title="<?= $block->escapeHtmlAttr($job->getTitle()) ?>">
+                            <?= $block->escapeHtml($job->getTitle()) ?>
+                        </a>
+                    </div>
+                    <div class="department-name">
+                        <span class="label"><?= $block->escapeHtml(__('Department:')) ?></span>
+                        <a href="<?= $block->escapeUrl($block->getDepartmentUrl($job)) ?>"
+                            title="<?= $block->escapeHtmlAttr($job->getDepartmentName()) ?>">
+                            <?= $block->escapeHtml($job->getDepartmentName()) ?>
+                        </a>
+                    </div>
+                    <div class="type"><?= $block->escapeHtml($job->getType()) ?></div>
+                    <div class="location"><?= $block->escapeHtml($job->getLocation()) ?></div>
+                    <div class="date"><?= $block->escapeHtml($block->formatDate($job->getDate())) ?></div>
+                    <div class="description"><?= $block->escapeHtml($job->getDescription()) ?></div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    <?php endif; ?>
+</div>

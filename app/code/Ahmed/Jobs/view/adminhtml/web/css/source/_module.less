@@ -1,0 +1,16 @@
+@ahmedjobs-icons-admin__font-name-path: '@{baseDir}Ahmed_Jobs/fonts/AhmedFonts/jobs';
+@ahmedjobs-icons-admin__font-name: 'AhmedJobs';
+
+.lib-font-face(
+    @family-name: @ahmedjobs-icons-admin__font-name,
+    @font-path: @ahmedjobs-icons-admin__font-name-path,
+    @font-format: 'woff',
+    @font-weight: normal,
+    @font-style: normal,
+    @font-type: 'woff'
+);
+
+.admin__menu .item-job-head.level-0 > a:before {
+    content: '\e976';
+    font-family: @ahmedjobs-icons-admin__font-name;
+}

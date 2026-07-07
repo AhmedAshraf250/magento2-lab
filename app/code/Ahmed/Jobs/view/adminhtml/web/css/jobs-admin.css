@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'AhmedJobs';
+    src: url('../fonts/AhmedFonts/jobs.woff') format('woff');
+    font-style: normal;
+    font-weight: normal;
+}
+
+.admin__menu .item-job-head.level-0 > a:before,
+.admin__menu .item-job-head > a:before {
+    content: '\e976' !important;
+    font-family: 'AhmedJobs' !important;
+}

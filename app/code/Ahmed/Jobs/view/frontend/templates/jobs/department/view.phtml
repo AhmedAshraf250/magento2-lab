@@ -1,0 +1,55 @@
+<?php
+
+/** @var \Ahmed\Jobs\Block\Department\View $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$department = $block->getLoadedDepartment();
+$jobCollection = $block->getLoadedJobsCollection();
+?>
+<?php if ($department->getId()) : ?>
+    <div class="department-view-wrapper">
+        <div class="description"><?= $escaper->escapeHtml($department->getDescription()) ?></div>
+    </div>
+
+    <?php if ($jobCollection && $jobCollection->getSize()) : ?>
+        <h2><?= $escaper->escapeHtml(__('Jobs for this department')) ?></h2>
+        <ol class="jobs-list">
+            <?php foreach ($jobCollection as $job) : ?>
+                <li class="job-card">
+                    <div class="job-card__header">
+                        <h3 class="job-card__title">
+                            <a href="<?= $escaper->escapeUrl($block->getJobUrl($job)) ?>" title="<?= $escaper->escapeHtmlAttr($job->getTitle()) ?>">
+                                <?= $escaper->escapeHtml($job->getTitle()) ?>
+                            </a>
+                        </h3>
+
+                        <span class="job-card__badge">
+                            <?= $escaper->escapeHtml($job->getType()) ?>
+                        </span>
+                    </div>
+
+                    <div class="job-card__meta">
+                        <span><?= $escaper->escapeHtml($job->getLocation()) ?></span>
+                        <span><?= $escaper->escapeHtml($block->formatDate($job->getDate())) ?></span>
+                    </div>
+
+                    <p class="job-card__description">
+                        <?= $escaper->escapeHtml($job->getDescription()) ?>
+                    </p>
+
+                    <a class="job-card__action" href="<?= $escaper->escapeUrl($block->getJobUrl($job)) ?>">
+                        <?= $escaper->escapeHtml(__('View Job')) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    <?php else : ?>
+        <div class="message info empty">
+            <div><?= $escaper->escapeHtml(__('There are no jobs available for this department at the moment.')) ?></div>
+        </div>
+    <?php endif; ?>
+<?php else : ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('This department does not exist.')) ?></div>
+    </div>
+<?php endif; ?>

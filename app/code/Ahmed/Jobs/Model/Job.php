@@ -48,4 +48,10 @@ class Job extends AbstractModel
     {
         return 0;
     }
+
+    public function getAvailableStatuses()
+    {
+        return [$this->getDisableStatus() => __('Disabled'), $this->getEnableStatus() => __('Enabled')];
+        // [0 => 'Disabled', 1 => 'Enabled']
+    }
 }

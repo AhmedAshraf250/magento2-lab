@@ -1,0 +1,48 @@
+<?php
+
+/** @var \Ahmed\Jobs\Block\Job\ListJob $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$jobCollection = $block->getLoadedJobCollection();
+?>
+
+<div class="job-wrapper">
+    <?php if (!$jobCollection->getSize()): ?>
+        <div class="message info empty">
+            <div><?= $escaper->escapeHtml(__('There are no jobs available at the moment.')) ?></div>
+        </div>
+    <?php else: ?>
+        <ol class="jobs-list">
+            <?php foreach ($jobCollection as $job): ?>
+                <li class="job-card">
+                    <div class="job-card__header">
+                        <h2 class="job-card__title">
+                            <a href="<?= $escaper->escapeUrl($block->getJobUrl($job)) ?>">
+                                <?= $escaper->escapeHtml($job->getTitle()) ?>
+                            </a>
+                        </h2>
+
+                        <span class="job-card__badge">
+                            <?= $escaper->escapeHtml($job->getType()) ?>
+                        </span>
+                    </div>
+
+                    <div class="job-card__meta">
+                        <span><?= $escaper->escapeHtml($job->getDepartmentName()) ?></span>
+                        <span><?= $escaper->escapeHtml($job->getLocation()) ?></span>
+                        <span><?= $escaper->escapeHtml($block->formatDate($job->getDate())) ?></span>
+                    </div>
+
+                    <p class="job-card__description">
+                        <?= $escaper->escapeHtml($job->getDescription()) ?>
+                    </p>
+
+                    <a class="job-card__action"
+                        href="<?= $escaper->escapeUrl($block->getJobUrl($job)) ?>">
+                        <?= $escaper->escapeHtml(__('View Job')) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    <?php endif; ?>
+</div>

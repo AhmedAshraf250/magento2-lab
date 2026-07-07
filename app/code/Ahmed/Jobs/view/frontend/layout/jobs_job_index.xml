@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <css src="Ahmed_Jobs::jobs.less" /> <!-- Ahmed/Jobs/view/frontend/web/jobs.less -->
+        <!-- <link src="Ahmed_Jobs::js/custom.js"/> -->
+        <!-- <meta name="description" content="Look at the jobs we have got for you"/> -->
+        <!-- <meta name="keywords" content="job,hiring"/> -->
+    </head>
+    <body>
+
+        <!-- 
+            <reference name="head">
+                <action method="setTitle"><title>We are hiring</title></action>
+                <action method="setDescription"><description>Look at the jobs we have got for you</description></action>
+                <action method="setKeywords"><keywords>job,hiring</keywords></action>
+            </reference> 
+        -->
+
+        <referenceContainer name="content">
+            <block class="Ahmed\Jobs\Block\Job\ListJob" name="jobs_job_list" template="Ahmed_Jobs::jobs/list.phtml" />
+        </referenceContainer>
+    </body>
+</page>

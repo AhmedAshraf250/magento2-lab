@@ -1,0 +1,28 @@
+<?php
+
+/** @var \Ahmed\Jobs\Block\Job\View $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$job = $block->getLoadedJob();
+$department = $block->getLoadedDepartment();
+?>
+<?php if ($job->getId()) : ?>
+    <div class="job-view-wrapper">
+        <div class="department_name">
+            <?= $escaper->escapeHtml(__('Department:')) ?>
+            <?php if ($department->getId()) : ?>
+                <a href="<?= $escaper->escapeUrl($block->getDepartmentUrl($job)) ?>" title="<?= $escaper->escapeHtmlAttr($department->getName()) ?>">
+                    <?= $escaper->escapeHtml($department->getName()) ?>
+                </a>
+            <?php endif; ?>
+        </div>
+        <div class="type"><?= $escaper->escapeHtml($job->getType()) ?></div>
+        <div class="location"><?= $escaper->escapeHtml($job->getLocation()) ?></div>
+        <div class="date"><?= $escaper->escapeHtml($block->formatDate($job->getDate())) ?></div>
+        <div class="description"><?= $escaper->escapeHtml($job->getDescription()) ?></div>
+    </div>
+<?php else : ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('This job does not exist.')) ?></div>
+    </div>
+<?php endif; ?>
