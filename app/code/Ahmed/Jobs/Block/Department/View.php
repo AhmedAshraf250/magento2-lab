@@ -2,6 +2,7 @@
 
 namespace Ahmed\Jobs\Block\Department;
 
+use Ahmed\Jobs\Helper\Data as JobsHelper;
 use Ahmed\Jobs\Model\Department;
 use Ahmed\Jobs\Model\Job;
 use Ahmed\Jobs\Model\ResourceModel\Job\Collection;
@@ -21,16 +22,20 @@ class View extends Template
 
     protected Registry $_registry;
 
+    protected JobsHelper $jobsHelper;
+
     public function __construct(
         Context $context,
         Department $department,
         Job $job,
         Registry $registry,
+        JobsHelper $jobsHelper,
         array $data = []
     ) {
         $this->_department = $department;
         $this->_job = $job;
         $this->_registry = $registry;
+        $this->jobsHelper = $jobsHelper;
 
         parent::__construct($context, $data);
     }
@@ -108,13 +113,17 @@ class View extends Template
 
     protected function _getJobsCollection(): ?Collection
     {
+        if (!$this->getConfigJobsDepartmentViewList()) {
+            return null;
+        }
+
         $department = $this->getLoadedDepartment();
 
         if ($this->_jobCollection === null && $department->getId()) {
             /** @var Collection  $jobCollection */
             $jobCollection = $this->_job->getCollection();
             $jobCollection->addFieldToFilter('department_id', $department->getId());
-            $jobCollection->addStatusFilter($this->_job, $department);
+            $jobCollection->addStatusFilterWithDepartment($this->_job, $department); // 
             $this->_jobCollection = $jobCollection;
         }
 
@@ -133,5 +142,10 @@ class View extends Template
     public function getListJobUrl(): string
     {
         return $this->getUrl('jobs/job');
+    }
+
+    public function getConfigJobsDepartmentViewList(): bool // getConfigListJobs
+    {
+        return $this->jobsHelper->canShowDepartmentJobList();
     }
 }

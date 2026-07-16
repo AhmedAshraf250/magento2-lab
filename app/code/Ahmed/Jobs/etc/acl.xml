@@ -4,18 +4,28 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
+
                 <!--<resource id="Magento_Backend::content">-->
-                    <resource id="Ahmed_Jobs::job_head" title="Jobs" sortOrder="100" >
-                        <resource id="Ahmed_Jobs::department" title="Departments" sortOrder="10">
-                            <resource id="Ahmed_Jobs::department_save" title="Save Department" sortOrder="10" />
-                            <resource id="Ahmed_Jobs::department_delete" title="Delete Department" sortOrder="20" />
-                        </resource>
-                        <resource id="Ahmed_Jobs::job" title="Jobs" sortOrder="20">
-                            <resource id="Ahmed_Jobs::job_save" title="Save Job" sortOrder="10" />
-                            <resource id="Ahmed_Jobs::job_delete" title="Delete Job" sortOrder="20" />
+                <resource id="Ahmed_Jobs::job_head" title="Jobs" sortOrder="100" >
+                    <resource id="Ahmed_Jobs::department" title="Departments" sortOrder="10">
+                        <resource id="Ahmed_Jobs::department_save" title="Save Department" sortOrder="10" />
+                        <resource id="Ahmed_Jobs::department_delete" title="Delete Department" sortOrder="20" />
+                    </resource>
+                    <resource id="Ahmed_Jobs::job" title="Jobs" sortOrder="20">
+                        <resource id="Ahmed_Jobs::job_save" title="Save Job" sortOrder="10" />
+                        <resource id="Ahmed_Jobs::job_delete" title="Delete Job" sortOrder="20" />
+                    </resource>
+                </resource>
+
+                <!-- Admin config -->
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Ahmed_Jobs::config" title="Jobs Configuration" />
                         </resource>
                     </resource>
-                <!--</resource>-->
+                </resource>
+
             </resource>
         </resources>
     </acl>

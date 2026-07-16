@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <!-- system.xml -->
+     <!-- 
+            <section id="ahmed_jobs">
+                <group id="department">
+                    <field id="view_list">
+     -->
+    <default>
+        <ahmed_jobs>
+            <department>
+                <view_list>1</view_list>
+            </department>
+            
+            <cron>
+                <!-- Every day at midnight -->
+                <schedule>0 0 * * *</schedule>
+            </cron>
+            
+        </ahmed_jobs>
+    </default>
+ 
+    <websites>
+        <!-- [websitecode] -->
+        <!-- <base> 
+            <ahmed_jobs>
+                <department>
+                    <view_list>1</view_list>
+                </department>
+            </ahmed_jobs>
+        </base> -->
+    </websites>
+ 
+    <stores>
+        <!-- [storeviewcode] --> <!-- the code of the store view that defined in admin "stores > Configuration > ..." which is 'defualt' name in that situation -->
+        <!-- <default> 
+            <ahmed_jobs>
+                <department>
+                    <view_list>1</view_list>
+                </department>
+            </ahmed_jobs>
+        </default> -->
+    </stores>
+</config>

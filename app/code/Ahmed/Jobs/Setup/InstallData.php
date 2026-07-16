@@ -9,6 +9,7 @@ use Ahmed\Jobs\Model\ResourceModel\Job as JobResource;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Config\Model\ResourceModel\Config;
 
 class InstallData implements InstallDataInterface
 {
@@ -20,16 +21,20 @@ class InstallData implements InstallDataInterface
 
     private JobResource $jobResource;
 
+    private Config $configResource;
+
     public function __construct(
         DepartmentFactory $departmentFactory,
         JobFactory $jobFactory,
         DepartmentResource $departmentResource,
-        JobResource $jobResource
+        JobResource $jobResource,
+        Config $configResource
     ) {
         $this->departmentFactory = $departmentFactory;
         $this->jobFactory = $jobFactory;
         $this->departmentResource = $departmentResource;
         $this->jobResource = $jobResource;
+        $this->configResource = $configResource;
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -106,6 +111,13 @@ class InstallData implements InstallDataInterface
             $job->setData($data);
             $this->jobResource->save($job);
         }
+
+        $this->configResource->saveConfig(
+            'ahmed_jobs/department/view_list',
+            '1',
+            'default',
+            0
+        );
 
         $installer->endSetup();
     }

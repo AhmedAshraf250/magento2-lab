@@ -22,3 +22,15 @@ bin/magento cache:disables
 bin/magento deploy:mode:show
 bin/magento deploy:mode:set developer # (default,production)
 ```
+```bash
+bin/cron starts # Start or stop the cron service
+bin/cron status
+
+bin/cron stop
+bin/magento cron:remove
+bin/cli crontab -l # 
+bin/mysql -e "TRUNCATE TABLE cron_schedule;"
+bin/cli sh -lc ': > var/log/magento.cron.log'
+bin/magento cron:install
+bin/cron start
+```

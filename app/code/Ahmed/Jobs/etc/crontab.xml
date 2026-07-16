@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <!-- <group id="default"> -->
+    <group id="ahmed_jobs"> <!-- LIKE Queue Names in Laravel -->
+        <job instance="Ahmed\Jobs\Cron\DisableJobs" method="execute" name="ahmed_jobs_disable_jobs">
+            <!-- <schedule>*/5 * * * *</schedule> -->
+            <config_path>ahmed_jobs/cron/schedule</config_path> <!-- system.xml path (ahmed_jobs/cron/schedule) -->
+        </job>
+    </group>
+</config>

@@ -106,7 +106,7 @@ class ListJob extends \Magento\Framework\View\Element\Template
             //     );
 
             $jobCollection = $this->_jobCollectionFactory->create();
-            $jobCollection->addStatusFilter($this->_job, $this->_department);
+            $jobCollection->addStatusFilterWithDepartment($this->_job, $this->_department);
 
             $this->_jobCollection = $jobCollection;
         }

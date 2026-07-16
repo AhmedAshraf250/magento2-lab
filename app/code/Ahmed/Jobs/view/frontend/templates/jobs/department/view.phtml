@@ -4,14 +4,15 @@
 /** @var \Magento\Framework\Escaper $escaper */
 
 $department = $block->getLoadedDepartment();
-$jobCollection = $block->getLoadedJobsCollection();
+$showJobList = $block->getConfigJobsDepartmentViewList();
+$jobCollection = $showJobList ? $block->getLoadedJobsCollection() : null;
 ?>
 <?php if ($department->getId()) : ?>
     <div class="department-view-wrapper">
         <div class="description"><?= $escaper->escapeHtml($department->getDescription()) ?></div>
     </div>
 
-    <?php if ($jobCollection && $jobCollection->getSize()) : ?>
+    <?php if ($showJobList && $jobCollection && $jobCollection->getSize()) : ?>
         <h2><?= $escaper->escapeHtml(__('Jobs for this department')) ?></h2>
         <ol class="jobs-list">
             <?php foreach ($jobCollection as $job) : ?>
@@ -43,7 +44,7 @@ $jobCollection = $block->getLoadedJobsCollection();
                 </li>
             <?php endforeach; ?>
         </ol>
-    <?php else : ?>
+    <?php elseif ($showJobList) : ?>
         <div class="message info empty">
             <div><?= $escaper->escapeHtml(__('There are no jobs available for this department at the moment.')) ?></div>
         </div>

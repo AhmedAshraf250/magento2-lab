@@ -21,7 +21,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->_init('Ahmed\Jobs\Model\Job', 'Ahmed\Jobs\Model\ResourceModel\Job');
     }
 
-    public function addStatusFilter(Job $job, Department $department)
+    public function addStatusFilterWithDepartment(Job $job, Department $department)
     {
         $this->addFieldToSelect('*')
             ->addFieldToFilter('status', $job->getEnableStatus());
